@@ -1,0 +1,28 @@
+// RTG Classes
+.fade-appear,
+.fade-appear-active,
+.fade-exit,
+.fade-exit-active,
+.fade-exit-done,
+.fade-enter,
+.fade-enter-active {
+  //transition: opacity 0.5s ease-in-out;
+  // transition-delay: 1.25s;
+}
+.fade-appear,
+.fade-enter {
+  opacity: 0;
+}
+.fade-appear.fade-appear-active,
+.fade-enter.fade-enter-active {
+  opacity: 1;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit.fade-exit-active,
+.fade-exit-done {
+  opacity: 0;
+}
+
+
