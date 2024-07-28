@@ -12,7 +12,7 @@ const router: Router = Router();
 // Middleware
 lambdaServer.use(
   cors({
-    origin: ["bonx.janeadamdesign.dev", "bonx.netlify.app"], // Currently a wildcard. Can be replaced with client origin
+    origin: ["https://bonx.janeadamdesign.dev", "https://bonx.netlify.app"], // Currently a wildcard. Can be replaced with client origin
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
