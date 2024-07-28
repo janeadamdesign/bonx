@@ -23,7 +23,7 @@ lambdaServer.use(bodyParser.json());
 router.get("/", (req, res) => {
   res.send("Hello from lambdaServer!");
 });
-lambdaServer.use("/lambdaServer/", router);
+lambdaServer.use("/.netlify/functions/lambdaServer/", router);
 
 //export
 export const handler = serverless(lambdaServer);
