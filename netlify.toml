@@ -1,8 +1,0 @@
-[build]
-functions = "netlify-functions"
-
-# Superfluous code - client-side JS rewritten to reference netlify url
-# [[redirects]]
-#  from = "http://192.168.1.159:4242/*"
-# to = "/.netlify/functions/lambda/:splat"
-#status = 200
