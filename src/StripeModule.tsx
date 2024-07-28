@@ -59,12 +59,16 @@ function StripeModuleContent(
   - POST {amount} to Express server requesting create Payment Intent; amount taken from props.
   - Retrieve client_secret from Express server upon succesful Payment Intent creation
   - Store the client_secret as state in React for later injection into payment confirmation code 
-  - Execute this on component load using dependency array */
+  - Execute this on component load using dependency array
+  - edited HTTP request url to reflect netlify fx
+  */
+  const localUrl: string = "http://192.168.1.159:4242";
+  const netlifyUrl: string = "/.netlify/functions/lambda"
   const [clientSecret, setClientSecret]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
   const createPaymentIntent = async (amount: number): Promise<void> => {
     try {
       const response: Response = await fetch(
-        `http://192.168.1.159:4242/create-payment-intent`, // using local ip
+        `${netlifyUrl}/create-payment-intent`, // using local ip
         {
           method: "POST",
           headers: {
