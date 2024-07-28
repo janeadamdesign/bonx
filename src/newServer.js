@@ -79,7 +79,7 @@ newServer.post(
 /* The purpose of the webhook functionality is to allow the Stripe server to update our Express server with respect to what is happening with the Payment Intent as is being processed between the client-side JS and the stripe server. In real a real life use case our switch statement below would do things like send our emails to the customer, despatch stock, but most importantly keep a record of the payment and update records accordingly. */
 
 // These are the keys used for handling the webhook. CLI is for demo version listening on port 4242.
-const secretWebhooksKey = "placeholderMustBeLocalisedToEachEndpoint";
+const secretWebhooksKey = "whsec_IMyPfHI2HMhZT8pF93gCpYLQ6ym0dh6C";
 const secretWebhooksCLI =
   "whsec_9f7fb8fa70ed88d76abd4541d4eb10b10d10e61d76d58119e36e85fa70655109"; // This is your Stripe CLI webhook secret for testing your endpoint locally.
 

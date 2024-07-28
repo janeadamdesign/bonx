@@ -54,6 +54,55 @@ router.post(
   createPaymentIntent
 );
 
+// Webhooks
+const secretWebhooksKey = "whsec_IMyPfHI2HMhZT8pF93gCpYLQ6ym0dh6C";
+const secretWebhooksCLI =
+  "whsec_9f7fb8fa70ed88d76abd4541d4eb10b10d10e61d76d58119e36e85fa70655109"; // This is your Stripe CLI webhook secret for testing your endpoint locally.
+async function handleWebhook(req: Request, res: Response): Promise<void> {
+  let sig: string | string[] = [];
+  if (req.headers && req.headers["stripe-signature"]) {
+    sig = req.headers["stripe-signature"];
+  } else return;
+  let event: Stripe.Event | null = null;
+  try {
+    // Verify the webhook signature using the raw body
+    event = stripe.webhooks.constructEvent(req.body, sig, secretWebhooksKey);
+  } catch (error) {
+    console.error("Webhook signature verification failed:", error.message);
+    res.status(400).send(`Webhook Error: ${error.message}`);
+    return;
+  }
+  if (event) {
+    switch (
+      event.type // In a real integration this would offer merchant backend fx like despatching products
+    ) {
+      case "payment_intent.created":
+        console.log(`Payment Intent created`);
+        break;
+      case "payment_intent.requires_action":
+        console.log(`Action required`);
+        break;
+      case "payment_intent.processing":
+        console.log(`Processing`);
+        break;
+      case "payment_intent.succeeded":
+        console.log(`Success!`);
+        break;
+      case "payment_intent.payment_failed":
+        console.log(`Failed!`);
+        break;
+      default:
+        console.log("Something's gone wrong: default case");
+    }
+  }
+  res.status(200).send({ received: true });
+}
+router.post(
+  "/webhook",
+  bodyParser.raw({ type: "application/json" }),
+  handleWebhook
+);
+
 // First argument refers to where server is LISTENING not posting. Redirection necessary because relative paths ordinarily assume listening at the root of the domain.
 lambdaServer.use("/.netlify/functions/lambdaServer/", router);
 
