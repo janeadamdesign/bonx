@@ -8,7 +8,8 @@ const serverless = require("serverless-http");
 
 
 // Declaration of server
-const lambdaServer = express()
+const lambdaServer = express();
+const router = express.Router();
 
 
 // troubleshooting GET
