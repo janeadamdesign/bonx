@@ -9,10 +9,21 @@ import serverless from "serverless-http";
 const lambdaServer: Express = express();
 const router: Router = Router();
 
+//middleware
+lambdaServer.use(
+  cors({
+    origin: "*", // Currently a wildcard. Can be replaced with client origin
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+lambdaServer.use(bodyParser.json());
+
+// router
 router.get("/", (req, res) => {
   res.send("Hello from lambdaServer!");
 });
-
 lambdaServer.use("/lambdaServer/", router);
 
+//export
 export const handler = serverless(lambdaServer);
