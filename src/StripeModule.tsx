@@ -63,7 +63,7 @@ function StripeModuleContent(
   - edited HTTP request url to reflect netlify fx
   */
   const localUrl: string = "http://192.168.1.159:4242";
-  const netlifyUrl: string = "/.netlify/functions/lambda"
+  const netlifyUrl: string = "/.netlify/functions/lambdaServer"
   const [clientSecret, setClientSecret]: [string | null, React.Dispatch<React.SetStateAction<string | null>>] = useState<string | null>(null);
   const createPaymentIntent = async (amount: number): Promise<void> => {
     try {
