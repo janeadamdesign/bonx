@@ -33,7 +33,7 @@ newServer.use(
 );
 
 // troubleshooting GET
-newServer.get("/", (req, res) => {
+newServer.get("/newServer/", (req, res) => {
   res.send("Hello from lambdaServer!");
 });
 
