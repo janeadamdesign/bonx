@@ -2,8 +2,3 @@
     external_node_modules = ["express"]
     node_bundler = "esbuild"
 
-[[redirects]]
-  force = true
-  from = "/lambdaServer/*"
-  status = 200
-  to = "/.netlify/functions/lambdaServer/:splat"
