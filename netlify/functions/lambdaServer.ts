@@ -24,8 +24,8 @@ router.get("/", (req: Request, res: Response): void => {
 });
 
 // Payment Intents
-const secretStripeKey: string =
-  "sk_test_51PKfLNRwMlFpLQQhlspLqt0zpDLuALXbGrGC9PLe38SmLn7FvOf0V5GE9D2DZWKRkQWzfAgJcKoULY2RBcKy7e5k00EsCsvTQM";
+
+const secretStripeKey: string = process.env.SECRET_STRIPE_KEY as string;
 const stripe: stripePackage = new stripePackage(secretStripeKey, {
   apiVersion: "2024-04-10",
 });
@@ -55,9 +55,7 @@ router.post(
 );
 
 // Webhooks
-const secretWebhooksKey = "whsec_IMyPfHI2HMhZT8pF93gCpYLQ6ym0dh6C";
-const secretWebhooksCLI =
-  "whsec_9f7fb8fa70ed88d76abd4541d4eb10b10d10e61d76d58119e36e85fa70655109"; // This is your Stripe CLI webhook secret for testing your endpoint locally.
+const secretWebhooksKey = process.env.SECRET_WEBHOOKS_KEY as string;
 async function handleWebhook(req: Request, res: Response): Promise<void> {
   let sig: string | string[] = [];
   if (req.headers && req.headers["stripe-signature"]) {
@@ -108,3 +106,10 @@ lambdaServer.use("/.netlify/functions/lambdaServer/", router);
 
 //export
 export const handler = serverless(lambdaServer);
+
+/* Redacted keys: these are replaced with environment variables supplied from Netlify. No need to actually remove from javascript as not real security concern
+- const secretStripeKey: string =
+  "sk_test_51PKfLNRwMlFpLQQhlspLqt0zpDLuALXbGrGC9PLe38SmLn7FvOf0V5GE9D2DZWKRkQWzfAgJcKoULY2RBcKy7e5k00EsCsvTQM";
+const secretWebhooksCLI =
+  "whsec_9f7fb8fa70ed88d76abd4541d4eb10b10d10e61d76d58119e36e85fa70655109"; // This is your Stripe CLI webhook secret for testing your endpoint locally.
+    const secretWebhooksKey = "whsec_IMyPfHI2HMhZT8pF93gCpYLQ6ym0dh6C"; */
