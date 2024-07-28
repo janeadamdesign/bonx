@@ -130,4 +130,4 @@
   
   
   // Instead we are going to export it as a module so it can be wrapped with lambda
-  module.exports(newServer);
+  module.exports = newServer;

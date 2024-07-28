@@ -1,4 +1,4 @@
-const serverless = require(serverless-http);
+const serverless = require("serverless-http");
 const lambdaServer = require('../../src/newServer');
 
-module.exports.handler(serverless(lambdaServer));
+module.exports.handler = serverless(lambdaServer);
