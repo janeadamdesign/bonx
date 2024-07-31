@@ -51,6 +51,14 @@ function SignUp(props: SignUpProps): React.ReactElement {
     return (): void => clearTimeout(wobbleTimerRef.current);
   }, [triggerState, emailValue, props.setFooterTrigger]);
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    if (e.key === 'Enter' || e.key === 'Return'){
+      e.preventDefault();
+      setTriggerState((prev: number): number => prev + 1);
+    }
+  }
+
+
   return (
     <motion.div
       initial={framerAnimations.initial}
@@ -65,6 +73,7 @@ function SignUp(props: SignUpProps): React.ReactElement {
           onChange={handleEmailChange}
           value={emailValue}
           required
+          onKeyDown={handleKeyPress}
         />
         <button
           id="subscribe"

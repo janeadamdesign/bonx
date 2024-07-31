@@ -738,10 +738,10 @@ body * {
   transition: 0.25s ease-in-out;
   text-transform: uppercase;
   letter-spacing: 0.075rem;
-  transform: scaleY(0.95);
-  text-shadow: 0.02rem 0.02rem 0.02rem black;
-  transition: 0.25s ease-in-out;
-}
+    text-shadow: 0.015rem 0.015rem 0.015rem black; 
+       /* transform: scaleY(0.95) */
+
+  }
 
 .list-ingred,
 .list-ingred-right,
