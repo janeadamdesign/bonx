@@ -1303,7 +1303,7 @@ body * {
 }
 
 .curly::after {
-  bottom: 0;
+  bottom: 10%;
 }
 
 .basket-inner {
