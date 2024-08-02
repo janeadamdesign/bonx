@@ -10,6 +10,7 @@ interface BonxHeadProps {
   scrollPositionY: number;
   setColour: React.Dispatch<React.SetStateAction<string>>;
   basket: BasketContents;
+  tiny: boolean;
 }
 
 function BonxHead(props: BonxHeadProps): React.ReactElement {
@@ -91,6 +92,15 @@ function BonxHead(props: BonxHeadProps): React.ReactElement {
     setBasketCount(total);
   }, [props.basket]);
 
+  const mouseLogoContent: {} | null = props.tiny ? null : {
+    onMouseEnter: (): void => {
+      setLogoToggle(true);
+    },
+    onMouseLeave: (): void => {
+      setLogoToggle(false);
+    },
+  };
+
   return (
     <>
       <BonxMenu
@@ -135,41 +145,18 @@ function BonxHead(props: BonxHeadProps): React.ReactElement {
                   alt="logo"
                   src="/bonxlogo.png"
                   id="logo"
-                  onMouseEnter={(): void => {
-                    setLogoToggle(true);
-                  }}
-                  onMouseLeave={(): void => {
-                    setLogoToggle(false);
-                  }}
+                  {...mouseLogoContent}
                 />
               ) : (
                 <img
                   alt="logob"
                   src="/bonxlogob.png"
                   id="logob"
-                  onMouseEnter={(): void => {
-                    setLogoToggle(true);
-                  }}
-                  onMouseLeave={(): void => {
-                    setLogoToggle(false);
-                  }}
+                  {...mouseLogoContent}
                 />
               )}
             </CSSTransition>
           </SwitchTransition>
-
-          {/*<img
-            alt="logo"
-            src={logoSwitch}
-            id={logoID}
-            onMouseEnter={(): void => {
-              setLogoToggle(true);
-            }}
-            onMouseLeave={(): void => {
-              setLogoToggle(false);
-            }}
-            style={{ opacity: logoOpacity }}
-          />*/}
         </Link>
         <div
           className={

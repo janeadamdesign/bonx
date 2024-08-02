@@ -98,6 +98,8 @@ function Bonx(props: BonxProps): React.ReactElement {
           scrollPositionY={scrollPositionY}
           setColour={setColour}
           basket={basket}
+          tiny={tiny}
+
         />
         <div id="offset">
           <AnimatedRoutes

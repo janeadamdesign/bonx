@@ -32,6 +32,7 @@ function BonxValues(props: BonxValuesProps): React.ReactElement {
         setLandscape(true);
       } else setLandscape(false);
     };
+    setLand();
     window.addEventListener("resize", setLand);
     return (): void => {
       window.removeEventListener("resize", setLand);
