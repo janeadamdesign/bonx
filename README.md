@@ -6,6 +6,12 @@ eCommerce website for a skin / hair product manufacturer. Featuring dynamic UX o
 
 Modular animated card elements are passed data as props to exhibit each individual product. ‘Values’ page elucidates design philosophy and corporate/social responsibility commitments with full-page illustrations. Basket functionality retrieves data from React state mirrored to browser cookies such that data is retained on page refresh. A dedicated basket page directs user to checkout via Stripe.
 
+All images generated with Midjourney.
+
+## Known issues
+
+- Firefox (iOS): appearance / retreat of bottom browser bezel causes unwanted expansion / contraction of UI not present on any other browser/environment combination.
+
 ## API Calls
 
 - getAddress API: generate addresses from postcode
