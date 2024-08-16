@@ -1,7 +1,5 @@
-import React, { useState} from "react";
-import {
-  Link,
-} from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 interface BonxMenuProps {
   burgerToggle: boolean;
@@ -10,7 +8,10 @@ interface BonxMenuProps {
 }
 
 function BonxMenu(props: BonxMenuProps): React.ReactElement {
-  const [menuIndex, setMenuIndex]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(0);
+  const [menuIndex, setMenuIndex]: [
+    number,
+    React.Dispatch<React.SetStateAction<number>>
+  ] = useState<number>(0);
 
   const menuHover = (e: React.MouseEvent<HTMLParagraphElement>): void => {
     const target: HTMLParagraphElement = e.currentTarget;
@@ -24,8 +25,28 @@ function BonxMenu(props: BonxMenuProps): React.ReactElement {
     props.setBurgerToggle(false);
   };
 
+  // UI to reset burger toggle if click outside bounding rect of menu
+  const menuRef: React.RefObject<HTMLDivElement | null> = useRef(null);
+  useEffect((): (() => void) => {
+    const handleExteriorClick = (event: MouseEvent): void => {
+      const target: EventTarget = event.target as EventTarget;
+      if (
+        props.burgerToggle &&
+        !menuRef.current?.contains(target as HTMLElement)
+      ) {
+        props.setBurgerToggle(false);
+      } else return;
+    };
+    document.addEventListener("mousedown", handleExteriorClick);
+
+    return (): void => {
+      document.removeEventListener("mousedown", handleExteriorClick);
+    };
+  }, [props.burgerToggle]);
+
   return (
     <div
+      ref={menuRef as React.RefObject<HTMLDivElement>}
       id="menu"
       className={props.burgerToggle ? "menu-active" : "menu-passive"}
     >
@@ -69,7 +90,7 @@ function BonxMenu(props: BonxMenuProps): React.ReactElement {
                 }
                 id="2"
                 onMouseOver={menuHover}
-                onMouseLeave={():void => setMenuIndex(0)}
+                onMouseLeave={(): void => setMenuIndex(0)}
                 onClick={linkClick}
               >
                 SKINCARE
@@ -86,7 +107,7 @@ function BonxMenu(props: BonxMenuProps): React.ReactElement {
                 }
                 id="3"
                 onMouseOver={menuHover}
-                onMouseLeave={():void => setMenuIndex(0)}
+                onMouseLeave={(): void => setMenuIndex(0)}
                 onClick={linkClick}
               >
                 HAIRCARE
@@ -103,7 +124,7 @@ function BonxMenu(props: BonxMenuProps): React.ReactElement {
                 }
                 id="4"
                 onMouseOver={menuHover}
-                onMouseLeave={():void => setMenuIndex(0)}
+                onMouseLeave={(): void => setMenuIndex(0)}
                 onClick={linkClick}
               >
                 OUR VALUES
@@ -120,7 +141,7 @@ function BonxMenu(props: BonxMenuProps): React.ReactElement {
                 }
                 id="5"
                 onMouseOver={menuHover}
-                onMouseLeave={():void => setMenuIndex(0)}
+                onMouseLeave={(): void => setMenuIndex(0)}
                 onClick={linkClick}
               >
                 {" "}
